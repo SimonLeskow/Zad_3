@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaskBoard</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f4f6f8; margin: 0; }
+    main { max-width: 600px; margin: 40px auto; background: #fff; padding: 24px;
+           border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+    h1 { margin-top: 0; }
+    form { display: flex; gap: 8px; }
+    input[type=text] { flex: 1; padding: 10px; font-size: 1rem; }
+    button { padding: 8px 12px; cursor: pointer; border: 1px solid #ccc;
+             background: #fff; border-radius: 6px; }
+    button.primary { background: #006b8f; color: #fff; border-color: #006b8f; }
+    .filters { margin: 16px 0; display: flex; gap: 6px; }
+    .filters button.active { background: #006b8f; color: #fff; }
+    #message { min-height: 1.4em; color: #b00020; margin: 8px 0; }
+    ul { list-style: none; padding: 0; }
+    li { display: flex; align-items: center; gap: 8px; padding: 10px 0;
+         border-bottom: 1px solid #eee; }
+    li .title { flex: 1; }
+    li.completed .title { text-decoration: line-through; color: #888; }
+    .summary { color: #555; margin-top: 12px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Lisat Zadań</h1>
+
+  <form id="task-form">
+    <input type="text" id="task-input" placeholder="Nowe zadanie..." autocomplete="off">
+    <button type="submit" class="primary">Dodaj</button>
+  </form>
+
+  <p id="message" role="alert"></p>
+
+  <div class="filters">
+    <button type="button" data-filter="all" class="active">Wszystkie</button>
+    <button type="button" data-filter="active">Aktywne</button>
+    <button type="button" data-filter="completed">Ukończone</button>
+  </div>
+
+  <ul id="task-list"></ul>
+
+  <p class="summary">
+    Wszystkie: <strong id="count-all">0</strong> |
+    Ukończone: <strong id="count-completed">0</strong>
+  </p>
+</main>
+
+<script src="{% static 'tasks/app.js' %}"></script>
+</body>
+</html>
